@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -17,19 +7,32 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { Provider } from 'react-redux';
+import createAppStore from './src/app-store/createAppStore';
+import { rootSaga } from './src/app-store/rootSaga';
+import { BLE_SAGA_ACTION } from './src/bluetooth/constants/bluetooth.constants';
+
+const store = createAppStore();
+store.runSaga(rootSaga);
+
+console.log("store", store.getState());
+store.dispatch({type: BLE_SAGA_ACTION.BLE_CONNECT_SAGA_ACTION});
 
 function App(){
-  return <View style={styles.sectionContainer}>
-    <Text>Remote Control</Text>
-    <View style={{flexDirection:'row'}}>
-        <View style={{width:32, height:32, backgroundColor:'red', margin:1}}></View>
-        <View style={{width:32, height:32, backgroundColor:'orange', margin:1}}></View>
-        <View style={{width:32, height:32, backgroundColor:'purple', margin:1}}></View>
-        <View style={{width:32, height:32, backgroundColor:'pink', margin:1}}></View>
-        <View style={{width:32, height:32, backgroundColor:'redpink', margin:1}}></View>
-        <View style={{width:32, height:32, backgroundColor:'darkred', margin:1}}></View>
+  return (
+  <Provider store={store}>
+    <View style={styles.sectionContainer}>
+      <Text>Remote Control</Text>
+      <View style={{flexDirection:'row'}}>
+          <View style={{width:32, height:32, backgroundColor:'red', margin:1}}></View>
+          <View style={{width:32, height:32, backgroundColor:'orange', margin:1}}></View>
+          <View style={{width:32, height:32, backgroundColor:'purple', margin:1}}></View>
+          <View style={{width:32, height:32, backgroundColor:'pink', margin:1}}></View>
+          <View style={{width:32, height:32, backgroundColor:'redpink', margin:1}}></View>
+          <View style={{width:32, height:32, backgroundColor:'darkred', margin:1}}></View>
+      </View>
     </View>
-  </View>
+  </Provider>)
 }
 
 const styles = StyleSheet.create({
