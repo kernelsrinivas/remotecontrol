@@ -24,7 +24,7 @@ function App(){
   return (
   <Provider store={store}>
     <SafeAreaView style={styles.sectionContainer}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={'#222'}/>
+      <StatusBar barStyle={'light-content'} backgroundColor={'#222'}/>
       <AppRouter/>
     </SafeAreaView>
   </Provider>)
