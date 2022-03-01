@@ -6,6 +6,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Platform
 } from 'react-native';
 import { Provider } from 'react-redux';
 import AppRouter from './src/app-router/AppRouter.index';
@@ -22,8 +23,8 @@ store.dispatch({type: BLE_SAGA_ACTION.BLE_CONNECT_SAGA_ACTION});
 function App(){
   return (
   <Provider store={store}>
-    <StatusBar/>
     <SafeAreaView style={styles.sectionContainer}>
+      <StatusBar barStyle={'dark-content'} backgroundColor={'#222'}/>
       <AppRouter/>
     </SafeAreaView>
   </Provider>)
@@ -31,8 +32,7 @@ function App(){
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+    marginTop: Platform.OS == "ios" ? 32 : 0,
     flex:1
   }
 });
